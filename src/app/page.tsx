@@ -54,6 +54,7 @@ export default function Home() {
   const [selectedTechnologies, setSelectedTechnologies] = useState<Technology[]>([]);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isRegenerating, setIsRegenerating] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -126,6 +127,32 @@ export default function Home() {
       setTimeout(() => setCopySuccess(false), 2000);
     } catch (err) {
       console.error('Failed to copy text:', err);
+    }
+  };
+
+  const handleRegenerate = async () => {
+    setIsRegenerating(true);
+    try {
+      const response = await fetch('/api/refine', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt,
+          selectedSuggestions,
+          selectedAgent: selectedAgent.id,
+          technologies: selectedTechnologies.map(tech => tech.name),
+          regenerate: true,
+        }),
+      });
+
+      const data = await response.json();
+      setRefinedPrompt(data.refinedPrompt);
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setIsRegenerating(false);
     }
   };
 
@@ -367,14 +394,37 @@ export default function Home() {
             </div>
           </div>
           <DialogFooter className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 mt-6">
-            <Button
-              onClick={handleCopyPrompt}
-              className="flex items-center gap-2 cursor-pointer bg-gray-800 text-white hover:bg-gray-700 hover:text-white dark:bg-gray-200 dark:text-gray-800 dark:hover:bg-gray-300 dark:hover:text-gray-800 transition-none w-full sm:w-auto"
-              variant="outline"
-            >
-              <Copy className="h-4 w-4" />
-              {copySuccess ? 'Copied!' : 'Copy Prompt'}
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <Button
+                onClick={handleCopyPrompt}
+                className="flex items-center gap-2 cursor-pointer bg-gray-800 text-white hover:bg-gray-700 hover:text-white dark:bg-gray-200 dark:text-gray-800 dark:hover:bg-gray-300 dark:hover:text-gray-800 transition-none w-full sm:w-auto"
+                variant="outline"
+              >
+                <Copy className="h-4 w-4" />
+                {copySuccess ? 'Copied!' : 'Copy Prompt'}
+              </Button>
+              <Button
+                onClick={handleRegenerate}
+                disabled={isRegenerating}
+                className="flex items-center gap-2 cursor-pointer w-full sm:w-auto"
+                variant="outline"
+              >
+                {isRegenerating ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span>Regenerating...</span>
+                  </>
+                ) : (
+                  <>
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M21.8883 13.5C21.1645 18.3113 17.013 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C16.1006 2 19.6248 4.46819 21.1679 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M17 8H21.4C21.7314 8 22 7.73137 22 7.4V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <span>Regenerate</span>
+                  </>
+                )}
+              </Button>
+            </div>
             <Button
               onClick={() => setIsDialogOpen(false)}
               className="flex items-center gap-2 cursor-pointer w-full sm:w-auto"
