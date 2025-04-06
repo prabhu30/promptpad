@@ -107,7 +107,7 @@ export function TechnologySelector({ selectedTechnologies, onChange }: Technolog
                     }`
                   }
                 >
-                  Add "{queryAsTechnology}" as new technology
+                  Add &quot;{queryAsTechnology}&quot; as new technology
                 </Combobox.Option>
               ) : (
                 <>
@@ -137,7 +137,7 @@ export function TechnologySelector({ selectedTechnologies, onChange }: Technolog
                         }`
                       }
                     >
-                      Add "{queryAsTechnology}" as new technology
+                      Add &quot;{queryAsTechnology}&quot; as new technology
                     </Combobox.Option>
                   )}
                 </>
