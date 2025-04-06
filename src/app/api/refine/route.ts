@@ -5,7 +5,7 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY!);
 
 export async function POST(request: Request) {
   try {
-    const { prompt, selectedSuggestions, selectedAgent } = await request.json();
+    const { prompt, selectedSuggestions, selectedAgent, technologies } = await request.json();
 
     if (!prompt || !selectedSuggestions) {
       return NextResponse.json(
@@ -26,6 +26,8 @@ export async function POST(request: Request) {
           text: `You are an AI assistant specialized in refining software requirements for the ${selectedAgent} coding agent. 
           Your task is to combine the original requirements with the selected enhancements to create a comprehensive and well-structured prompt. 
           Ensure the final prompt is clear, detailed, and maintains technical specificity while incorporating all selected improvements seamlessly.
+          Consider the following technologies in your response: ${technologies.join(', ')}.
+          Format your response with bullet points where appropriate to improve readability.
           Do not use any markdown formatting or special characters in your response.
           
           Original requirements:
@@ -38,6 +40,7 @@ export async function POST(request: Request) {
     });
 
     const response = await result.response;
+    console.log('Gemini Refine Response:', response.text());
     return NextResponse.json({
       refinedPrompt: response.text().replace(/\*\*/g, '')
     });

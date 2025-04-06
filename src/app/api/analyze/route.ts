@@ -5,7 +5,7 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY!);
 
 export async function POST(request: Request) {
   try {
-    const { prompt, suggestEnhancements, selectedAgent } = await request.json();
+    const { prompt, suggestEnhancements, selectedAgent, technologies } = await request.json();
 
     if (!prompt) {
       return NextResponse.json(
@@ -25,6 +25,7 @@ export async function POST(request: Request) {
             Your task is to analyze the given requirements and suggest 3-5 meaningful improvements or additional features 
             that would make the application more robust, user-friendly, or feature-complete. 
             Format each suggestion as a clear, concise bullet point without any markdown formatting or special characters.
+            Consider the following technologies in your suggestions: ${technologies.join(', ')}.
             
             Requirements:
             ${prompt}`
@@ -40,6 +41,7 @@ export async function POST(request: Request) {
         .map(line => line.replace(/\*\*/g, ''))
         .map(line => line.trim());
 
+      console.log('Gemini Analyze Response:', response.text());
       return NextResponse.json({ suggestions });
     } else {
       const result = await model.generateContent({
@@ -49,6 +51,8 @@ export async function POST(request: Request) {
             text: `You are an AI assistant specialized in refining software requirements for the ${selectedAgent} coding agent. 
             Your task is to analyze the given requirements and generate a clear, structured, and detailed prompt that will help 
             the coding agent better understand and implement the requirements. Focus on clarity, completeness, and technical specificity.
+            Consider the following technologies in your response: ${technologies.join(', ')}.
+            Format your response with bullet points where appropriate to improve readability.
             Do not use any markdown formatting or special characters in your response.
             
             Requirements:
@@ -58,6 +62,7 @@ export async function POST(request: Request) {
       });
 
       const response = await result.response;
+      console.log('Gemini Analyze Response:', response.text());
       return NextResponse.json({
         refinedPrompt: response.text().replace(/\*\*/g, '')
       });
