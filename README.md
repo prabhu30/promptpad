@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PromptPad
 
-## Getting Started
+PromptPad is an AI-powered web application that helps developers refine and enhance their application requirements. It uses Google's Gemini 1.5 Flash model to analyze requirements and suggest improvements, making it easier to create comprehensive and well-structured project specifications.
 
-First, run the development server:
+## Features
 
+- **Requirements Analysis**: Write your app requirements in a clean, distraction-free notepad interface
+- **AI-Powered Enhancements**: Toggle to receive AI-suggested improvements for your requirements
+- **Multiple Coding Agents**: Choose from different coding agents (Cursor, Windsurf, Lovable, Bolt) to optimize the prompt for your preferred development environment
+- **Interactive UI**:
+  - Clean and responsive design using Tailwind CSS
+  - Modal dialogs for refined prompts using shadcn/ui
+  - Copy-to-clipboard functionality
+  - Loading states and animations
+- **Smart Suggestions**: Get 3-5 contextual enhancement suggestions that you can selectively include
+- **Refined Output**: Receive a well-structured, detailed prompt that combines your original requirements with selected enhancements
+
+## Tech Stack
+
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- shadcn/ui components
+- Google Gemini AI API
+- React Hooks
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+- Node.js (v18.17 or higher)
+- npm (v9.6.7 or higher)
+- A Google AI API key ([Get one here](https://makersuite.google.com/app/apikey))
+
+## Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/promptpad.git
+cd promptpad
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Create a `.env.local` file in the root directory and add your Google AI API key:
+```bash
+cp .env.example .env.local
+```
+Then edit `.env.local` and replace the placeholder with your actual API key.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Start the development server:
+```bash
+npm run dev
+```
 
-## Learn More
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-To learn more about Next.js, take a look at the following resources:
+## Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Write Requirements**:
+   - Enter your application requirements in the main text area
+   - Be as detailed as possible for better results
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Choose Enhancement Mode**:
+   - Toggle "Suggest Enhancements" ON to get AI suggestions
+   - Toggle OFF to directly get a refined prompt
 
-## Deploy on Vercel
+3. **Select Coding Agent**:
+   - Choose your preferred coding agent from the dropdown
+   - This helps tailor the output to your development environment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Process Requirements**:
+   - Click "Generate" to process your input
+   - If enhancements are enabled, you'll see suggested improvements
+   - Select the enhancements you want to incorporate
+   - Click "Confirm Selected Enhancements" to get the final prompt
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. **Use the Refined Prompt**:
+   - Review the refined prompt in the modal dialog
+   - Use the copy button to copy it to your clipboard
+   - Close the dialog when done
+
+## Development
+
+- The application uses Next.js 14 with the App Router
+- Components are built using shadcn/ui for consistency
+- Tailwind CSS is used for styling
+- TypeScript ensures type safety
+- API routes handle communication with Google's Gemini AI
+
+## Environment Variables
+
+Required environment variables:
+- `GOOGLE_AI_API_KEY`: Your Google AI API key for accessing Gemini models
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Built with [Next.js](https://nextjs.org/)
+- UI components from [shadcn/ui](https://ui.shadcn.com/)
+- AI powered by [Google Gemini](https://deepmind.google/technologies/gemini/)
