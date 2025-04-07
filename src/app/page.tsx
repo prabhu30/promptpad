@@ -295,13 +295,13 @@ export default function Home() {
           >
             {theme === 'light' ? (
               <>
-                <Sun className="h-4 w-4" />
-                <span className="leading-none">Light Mode</span>
+                <Moon className="h-4 w-4" />
+                <span className="leading-none">Dark Mode</span>
               </>
             ) : (
               <>
-                <Moon className="h-4 w-4" />
-                <span className="leading-none">Dark Mode</span>
+                <Sun className="h-4 w-4" />
+                <span className="leading-none">Light Mode</span>
               </>
             )}
           </Button>
