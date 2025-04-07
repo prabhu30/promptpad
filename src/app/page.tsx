@@ -168,7 +168,7 @@ export default function Home() {
           <textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            className="w-full h-40 sm:h-48 p-3 sm:p-4 border rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full h-40 sm:h-48 p-3 sm:p-4 border rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-gray-200 dark:border-gray-600 focus:ring-1 focus:ring-gray-200 dark:focus:ring-gray-700 focus:border-gray-200 dark:focus:border-gray-700"
             placeholder="Describe your app requirements here..."
           />
         </div>

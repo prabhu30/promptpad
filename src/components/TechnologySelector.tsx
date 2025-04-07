@@ -86,23 +86,23 @@ export function TechnologySelector({ selectedTechnologies, onChange }: Technolog
         <Combobox value={null} onChange={addTechnology as (value: Technology | string | null) => void}>
           <div className="relative">
             <Combobox.Input
-              className="w-full h-10 px-4 border rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full h-10 px-4 border rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-gray-200 dark:border-gray-600 focus:ring-1 focus:ring-gray-200 dark:focus:ring-gray-700 focus:border-gray-200 dark:focus:border-gray-700"
               placeholder={isLoading ? "Loading technologies..." : "Search or enter new technology..."}
               onChange={(event) => setQuery(event.target.value)}
               displayValue={() => query}
             />
-            <Combobox.Options className="absolute z-10 w-full mt-1 overflow-auto bg-white dark:bg-gray-800 rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Combobox.Options className="absolute z-10 w-full mt-1 overflow-auto bg-white dark:bg-gray-800 rounded-md shadow-lg max-h-60 ring-1 ring-gray-200 dark:ring-gray-700 focus:outline-none p-1">
               {isLoading ? (
-                <div className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
+                <div className="px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300">
                   Loading technologies...
                 </div>
               ) : filteredTechnologies.length === 0 && query !== '' ? (
                 <Combobox.Option
                   value={queryAsTechnology}
                   className={({ active }) =>
-                    `relative cursor-pointer select-none py-2 px-4 ${
+                    `relative cursor-pointer select-none py-2 px-3 mb-0.5 rounded-md ${
                       active
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white'
                         : 'text-gray-900 dark:text-white'
                     }`
                   }
@@ -116,9 +116,9 @@ export function TechnologySelector({ selectedTechnologies, onChange }: Technolog
                       key={tech.id}
                       value={tech}
                       className={({ active }) =>
-                        `relative cursor-pointer select-none py-2 px-4 ${
+                        `relative cursor-pointer select-none py-2 px-3 mb-0.5 rounded-md ${
                           active
-                            ? 'bg-blue-600 text-white'
+                            ? 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white'
                             : 'text-gray-900 dark:text-white'
                         }`
                       }
@@ -130,9 +130,9 @@ export function TechnologySelector({ selectedTechnologies, onChange }: Technolog
                     <Combobox.Option
                       value={queryAsTechnology}
                       className={({ active }) =>
-                        `relative cursor-pointer select-none py-2 px-4 ${
+                        `relative cursor-pointer select-none py-2 px-3 mb-0.5 rounded-md ${
                           active
-                            ? 'bg-blue-600 text-white'
+                            ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white'
                             : 'text-gray-900 dark:text-white'
                         }`
                       }
