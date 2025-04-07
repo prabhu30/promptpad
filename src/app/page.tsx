@@ -325,7 +325,7 @@ export default function Home() {
             <div className="text-sm sm:text-base text-gray-700 dark:text-gray-200 mt-4 space-y-4">
               <DialogDescription asChild>
                 <span>
-                  PromptPad is an AI-powered tool designed to help you create better, more effective prompts for various coding agents. Here's what you can do:
+                  PromptPad is an AI-powered tool designed to help you create better, more effective prompts for various coding agents. Here&apos;s what you can do:
                 </span>
               </DialogDescription>
 
@@ -344,7 +344,7 @@ export default function Home() {
                 <h3 className="font-medium text-gray-800 dark:text-gray-100">How to Use:</h3>
                 <ul className="list-disc pl-4 sm:pl-5 space-y-2">
                   <li>Enter your requirements in the text area</li>
-                  <li>Toggle "Suggest Enhancements" to get AI improvements</li>
+                  <li>Toggle &quot;Suggest Enhancements&quot; to get AI improvements</li>
                   <li>Select your preferred coding agent</li>
                   <li>Click Generate to get your refined prompt</li>
                   <li>Review and copy the enhanced prompt</li>
